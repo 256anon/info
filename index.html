@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <title>FB谷歌TikTok代投 | 独家过审防封技术 · 灰白皆可投</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #f7f8fc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f0f3ff;
+      --border: rgba(100,120,200,0.10);
+      --border-hover: rgba(100,120,200,0.22);
+      --text-primary: #1a1d2e;
+      --text-secondary: #5a607a;
+      --text-muted: #9098ad;
+      --accent-blue: #4f46e5;
+      --accent-blue-light: #6366f1;
+      --accent-orange: #f55d14;
+      --accent-orange-light: #ff7849;
+      --accent-green: #059669;
+      --accent-pink: #db2777;
+      --accent-yellow: #d97706;
+      --accent-purple: #7c3aed;
+      --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+      --gradient-blue: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 20px rgba(99,102,241,0.08);
+      --shadow-lg: 0 12px 40px rgba(99,102,241,0.12);
+      --radius: 14px;
+      --radius-sm: 10px;
+      --max-width: 1200px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.5px;
+    }
+    .nav-brand span { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent-blue); }
+    .nav-tg-btn {
+      background: var(--gradient-primary);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 13px;
+      transition: all .2s;
+      box-shadow: 0 2px 12px rgba(99,102,241,0.25);
+    }
+    .nav-tg-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 60px;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 20%, rgba(99,102,241,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(5,150,105,0.06);
+      border: 1px solid rgba(5,150,105,0.18);
+      color: var(--accent-green);
+      font-size: 13px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      color: var(--text-primary);
+    }
+    .hero h1 .highlight { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
+    .hero-desc b { color: var(--accent-orange-light); }
+    .hero-points {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 24px;
+      margin-bottom: 36px;
+    }
+    .hero-point {
+      font-size: 15px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-point b { color: var(--text-primary); }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gradient-primary);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all .25s;
+      box-shadow: 0 8px 32px rgba(99,102,241,0.3);
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(99,102,241,0.45);
+    }
+    .hero-secure {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--accent-green);
+      font-size: 13px;
+    }
+    .hero-secure small {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* ===== STATS ===== */
+    .stats {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      transition: all .25s;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .stat-value {
+      font-size: 40px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .stat-value.green { color: var(--accent-green); }
+    .stat-value.yellow { color: var(--accent-yellow); }
+    .stat-value.orange { color: var(--accent-orange-light); }
+    .stat-value.blue { color: var(--accent-blue-light); }
+    .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ===== SECTION ===== */
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+    .section-title .accent { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    /* ===== CATEGORIES ===== */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .cat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: all .25s;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .cat-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .cat-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .cat-name {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .cat-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ===== SERVICES ===== */
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .svc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: all .25s;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+    }
+    .svc-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .svc-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .svc-icon.fb { background: rgba(79,70,229,0.08); color: var(--accent-blue); }
+    .svc-icon.google { background: rgba(245,93,20,0.08); color: var(--accent-orange); }
+    .svc-icon.tiktok { background: rgba(219,39,119,0.08); color: var(--accent-pink); }
+    .svc-name {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .svc-tag {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 4px;
+    }
+    .svc-tag.blue { background: rgba(79,70,229,0.08); color: var(--accent-blue); }
+    .svc-tag.orange { background: rgba(245,93,20,0.08); color: var(--accent-orange); }
+    .svc-tag.pink { background: rgba(219,39,119,0.08); color: var(--accent-pink); }
+    .svc-features {
+      list-style: none;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+    .svc-features li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .svc-features li:last-child { border-bottom: none; }
+    .svc-feat-title {
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+    .svc-feat-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .svc-cta {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .svc-cta.fb { background: rgba(79,70,229,0.08); color: var(--accent-blue); }
+    .svc-cta.fb:hover { background: var(--accent-blue); color: #fff; }
+    .svc-cta.google { background: rgba(245,93,20,0.08); color: var(--accent-orange); }
+    .svc-cta.google:hover { background: var(--accent-orange); color: #fff; }
+    .svc-cta.tiktok { background: rgba(219,39,119,0.08); color: var(--accent-pink); }
+    .svc-cta.tiktok:hover { background: var(--accent-pink); color: #fff; }
+
+    /* ===== CASES ===== */
+    .cases {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .case-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: all .25s;
+      box-shadow: var(--shadow-sm);
+    }
+    .case-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .case-platform {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .case-platform.fb { background: rgba(79,70,229,0.08); color: var(--accent-blue); }
+    .case-platform.google { background: rgba(124,58,237,0.08); color: var(--accent-purple); }
+    .case-platform.tiktok { background: rgba(219,39,119,0.08); color: var(--accent-pink); }
+    .case-category {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .case-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+    .case-market {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .case-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .case-metric {
+      text-align: center;
+    }
+    .case-metric-value {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+    .case-metric-value.green { color: var(--accent-green); }
+    .case-metric-value.yellow { color: var(--accent-yellow); }
+    .case-metric-value.orange { color: var(--accent-orange-light); }
+    .case-metric-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .case-bar-wrap {
+      margin-top: 12px;
+    }
+    .case-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .case-bar-label span:last-child { color: var(--text-primary); font-weight: 600; }
+    .case-bar {
+      height: 6px;
+      background: rgba(100,120,200,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .case-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(.4,0,.2,1);
+    }
+    .case-bar-fill.green { background: var(--accent-green); }
+    .case-bar-fill.blue { background: var(--accent-blue-light); }
+    .case-bar-fill.pink { background: var(--accent-pink); }
+
+    /* ===== CTA BOTTOM ===== */
+    .cta-bottom {
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .cta-bottom h2 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    .cta-bottom p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .cta-bottom .hero-cta {
+      font-size: 18px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    footer .footer-contact {
+      color: var(--text-secondary);
+    }
+    footer .footer-contact span { color: var(--accent-blue); font-weight: 600; }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 900px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .categories, .services, .cases { grid-template-columns: 1fr; }
+      .nav-links a:not(.nav-tg-btn) { display: none; }
+      .hero h1 { font-size: 30px; }
+      .hero-desc { font-size: 15px; }
+    }
+    @media (max-width: 500px) {
+      .stats { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+      .section-title { font-size: 26px; }
+      .hero-cta { font-size: 16px; padding: 14px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">FB<span>谷歌</span>TikTok代投</div>
+      <div class="nav-links">
+        <a href="#categories">类目</a>
+        <a href="#services">服务</a>
+        <a href="#cases">案例</a>
+        <a href="#" class="nav-tg-btn tg-btn">TG联系 @vip1010102</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div style="position: relative; z-index: 1;">
+      <div class="hero-tag">独家前沿过审防封技术 · 当天开户</div>
+      <h1>独家技术 · 专注于<br><span class="highlight">Google / Facebook / TikTok</span> 广告投放</h1>
+      <p class="hero-desc">灰白皆可，独家前沿过审防封技术，低至 <b>0.1</b> 起，可免费测试。</p>
+      <div class="hero-points">
+        <div class="hero-point"><b>6年</b> 海外投放实战经验</div>
+        <div class="hero-point"><b>2倍+</b> 平均ROI</div>
+        <div class="hero-point"><b>当天</b> 开户 · 隔天投放</div>
+      </div>
+      <a href="#" class="hero-cta tg-btn">立即咨询 @vip1010102 →</a>
+      <div class="hero-secure">
+        <span>安全链接已验证</span>
+        <small>· 所有联系方式均经加密校验，请认准 @vip1010102</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-value green">6年</div>
+      <div class="stat-label">海外投放经验</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value yellow">2倍+</div>
+      <div class="stat-label">平均ROI</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value orange">0.1起</div>
+      <div class="stat-label">行业冰点价格</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value blue">当天</div>
+      <div class="stat-label">开户速度</div>
+    </div>
+  </div>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section class="section" id="categories">
+    <h2 class="section-title">可投放<span class="accent">类目</span></h2>
+    <p class="section-desc">全行业覆盖，灰白皆可投，独家过审防封技术保驾护航</p>
+    <div class="categories">
+      <div class="cat-card">
+        <div class="cat-icon">🎮</div>
+        <div class="cat-name">游戏类</div>
+        <div class="cat-desc">Slots / 页游 / 手游 / H5游戏</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">💰</div>
+        <div class="cat-name">金融类</div>
+        <div class="cat-desc">量化金融 / Crypto / 贷款 / 投资</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">⚡</div>
+        <div class="cat-name">黑五类</div>
+        <div class="cat-desc">独家过审技术 / 高难品类专项支持</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">🔧</div>
+        <div class="cat-name">工具类</div>
+        <div class="cat-desc">VPN / 清理 / 工具APP / 效率软件</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">🛒</div>
+        <div class="cat-name">电商类</div>
+        <div class="cat-desc">独立站 / COD / 品牌出海 / 仿牌</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">📱</div>
+        <div class="cat-name">APP类</div>
+        <div class="cat-desc">兼职APP / 社交 / 阅读 / 系统工具</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="section" id="services">
+    <h2 class="section-title">我们的<span class="accent">服务</span></h2>
+    <p class="section-desc">Facebook + Google + TikTok 三平台代投，独家技术，一条龙服务</p>
+    <div class="services">
+      <!-- FB -->
+      <div class="svc-card">
+        <div class="svc-icon fb">f</div>
+        <div class="svc-name">Facebook 广告代投</div>
+        <div class="svc-tags">
+          <span class="svc-tag blue">灰白皆可</span>
+          <span class="svc-tag orange">独家过审防封</span>
+          <span class="svc-tag blue">高难品类</span>
+        </div>
+        <ul class="svc-features">
+          <li>
+            <div class="svc-feat-title">精准定位</div>
+            <div class="svc-feat-desc">锁定高价值用户，AI智能受众优化</div>
+          </li>
+          <li>
+            <div class="svc-feat-title">高ROI优化</div>
+            <div class="svc-feat-desc">平均2倍+ROI，持续扩量不掉量</div>
+          </li>
+          <li>
+            <div class="svc-feat-title">防封技术</div>
+            <div class="svc-feat-desc">独家前沿过审，账号稳定不封</div>
+          </li>
+        </ul>
+        <a href="#" class="svc-cta fb tg-btn">立即咨询 →</a>
+      </div>
+      <!-- Google -->
+      <div class="svc-card">
+        <div class="svc-icon google">G</div>
+        <div class="svc-name">Google Ads 代投</div>
+        <div class="svc-tags">
+          <span class="svc-tag blue">搜索+展示+YouTube</span>
+          <span class="svc-tag orange">低至0.1起</span>
+          <span class="svc-tag blue">当天开户</span>
+        </div>
+        <ul class="svc-features">
+          <li>
+            <div class="svc-feat-title">搜索霸屏</div>
+            <div class="svc-feat-desc">抢占关键词流量，品牌曝光最大化</div>
+          </li>
+          <li>
+            <div class="svc-feat-title">精准转化</div>
+            <div class="svc-feat-desc">高意图用户直达，转化率行业领先</div>
+          </li>
+          <li>
+            <div class="svc-feat-title">策略灵活</div>
+            <div class="svc-feat-desc">灰白政策宽松，多账号轮换保障稳定</div>
+          </li>
+        </ul>
+        <a href="#" class="svc-cta google tg-btn">立即咨询 →</a>
+      </div>
+      <!-- TikTok -->
+      <div class="svc-card">
+        <div class="svc-icon tiktok">T</div>
+        <div class="svc-name">TikTok 广告代投</div>
+        <div class="svc-tags">
+          <span class="svc-tag pink">短视频爆款引流</span>
+          <span class="svc-tag orange">素材原生感强</span>
+          <span class="svc-tag pink">年轻用户精准</span>
+        </div>
+        <ul class="svc-features">
+          <li>
+            <div class="svc-feat-title">爆款素材</div>
+            <div class="svc-feat-desc">原生短视频素材，自然流量+付费流量双驱动</div>
+          </li>
+          <li>
+            <div class="svc-feat-title">年轻受众</div>
+            <div class="svc-feat-desc">Z世代精准触达，APP安装/电商转化率高</div>
+          </li>
+          <li>
+            <div class="svc-feat-title">低CPM高转化</div>
+            <div class="svc-feat-desc">流量红利期，CPM远低于FB/Google，ROI空间大</div>
+          </li>
+        </ul>
+        <a href="#" class="svc-cta tiktok tg-btn">立即咨询 →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CASES ===== -->
+  <section class="section" id="cases">
+    <h2 class="section-title">投放<span class="accent">案例</span></h2>
+    <p class="section-desc">真实投放数据，覆盖三平台多品类，用结果说话</p>
+    <div class="cases">
+      <!-- Case 1 -->
+      <div class="case-card">
+        <span class="case-platform fb">Facebook</span>
+        <div class="case-category">Slots 游戏</div>
+        <div class="case-title">巴西 Slots 游戏扩量</div>
+        <div class="case-market">目标市场：巴西</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-value green">2.4x</div>
+            <div class="case-metric-label">ROI</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value yellow">$0.42</div>
+            <div class="case-metric-label">CPC</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value orange">$48K</div>
+            <div class="case-metric-label">月消耗</div>
+          </div>
+        </div>
+        <div class="case-bar-wrap">
+          <div class="case-bar-label"><span>扩量效率</span><span>78%</span></div>
+          <div class="case-bar"><div class="case-bar-fill green" data-width="78%"></div></div>
+        </div>
+      </div>
+      <!-- Case 2 -->
+      <div class="case-card">
+        <span class="case-platform google">Google Ads</span>
+        <div class="case-category">量化金融</div>
+        <div class="case-title">美国量化金融线索获取</div>
+        <div class="case-market">目标市场：美国</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-value green">2.1x</div>
+            <div class="case-metric-label">ROI</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value yellow">$0.68</div>
+            <div class="case-metric-label">CPC</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value orange">$72K</div>
+            <div class="case-metric-label">月消耗</div>
+          </div>
+        </div>
+        <div class="case-bar-wrap">
+          <div class="case-bar-label"><span>线索转化率</span><span>6.2%</span></div>
+          <div class="case-bar"><div class="case-bar-fill blue" data-width="62%"></div></div>
+        </div>
+      </div>
+      <!-- Case 3 -->
+      <div class="case-card">
+        <span class="case-platform tiktok">TikTok</span>
+        <div class="case-category">兼职 APP</div>
+        <div class="case-title">东南亚兼职 APP 安装</div>
+        <div class="case-market">目标市场：东南亚</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-value green">2.6x</div>
+            <div class="case-metric-label">ROI</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value yellow">$0.35</div>
+            <div class="case-metric-label">CPC</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value orange">$35K</div>
+            <div class="case-metric-label">月消耗</div>
+          </div>
+        </div>
+        <div class="case-bar-wrap">
+          <div class="case-bar-label"><span>安装转化率</span><span>9.1%</span></div>
+          <div class="case-bar"><div class="case-bar-fill pink" data-width="82%"></div></div>
+        </div>
+      </div>
+      <!-- Case 4 -->
+      <div class="case-card">
+        <span class="case-platform fb">Facebook</span>
+        <div class="case-category">H5 页面</div>
+        <div class="case-title">印度 H5 页面引流</div>
+        <div class="case-market">目标市场：印度</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-value green">1.9x</div>
+            <div class="case-metric-label">ROI</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value yellow">$0.28</div>
+            <div class="case-metric-label">CPC</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value orange">$28K</div>
+            <div class="case-metric-label">月消耗</div>
+          </div>
+        </div>
+        <div class="case-bar-wrap">
+          <div class="case-bar-label"><span>页面停留时长</span><span>4.2min</span></div>
+          <div class="case-bar"><div class="case-bar-fill green" data-width="70%"></div></div>
+        </div>
+      </div>
+      <!-- Case 5 -->
+      <div class="case-card">
+        <span class="case-platform tiktok">TikTok</span>
+        <div class="case-category">电商独立站</div>
+        <div class="case-title">美国电商独立站带货</div>
+        <div class="case-market">目标市场：美国</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-value green">2.3x</div>
+            <div class="case-metric-label">ROI</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value yellow">$0.55</div>
+            <div class="case-metric-label">CPC</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value orange">$55K</div>
+            <div class="case-metric-label">月消耗</div>
+          </div>
+        </div>
+        <div class="case-bar-wrap">
+          <div class="case-bar-label"><span>加购转化率</span><span>4.5%</span></div>
+          <div class="case-bar"><div class="case-bar-fill pink" data-width="55%"></div></div>
+        </div>
+      </div>
+      <!-- Case 6 -->
+      <div class="case-card">
+        <span class="case-platform google">Google Ads</span>
+        <div class="case-category">工具类 APP</div>
+        <div class="case-title">全球工具类 APP 推广</div>
+        <div class="case-market">目标市场：全球</div>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <div class="case-metric-value green">2.2x</div>
+            <div class="case-metric-label">ROI</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value yellow">$0.48</div>
+            <div class="case-metric-label">CPC</div>
+          </div>
+          <div class="case-metric">
+            <div class="case-metric-value orange">$62K</div>
+            <div class="case-metric-label">月消耗</div>
+          </div>
+        </div>
+        <div class="case-bar-wrap">
+          <div class="case-bar-label"><span>留存率 (7日)</span><span>35%</span></div>
+          <div class="case-bar"><div class="case-bar-fill blue" data-width="35%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BOTTOM ===== -->
+  <section class="cta-bottom">
+    <h2>灰白皆可 · 免费测试</h2>
+    <p>独家防封技术 + 行业冰点价格，助力您快速跑量冲ROI！</p>
+    <a href="#" class="hero-cta tg-btn">免费测试 · TG @vip1010102 →</a>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>© 2026 FB谷歌TikTok代投团队. All Rights Reserved.</p>
+    <p class="footer-contact">联系方式：TG <span>@vip1010102</span></p>
+  </footer>
+
+  <!-- ===== SECURITY SCRIPT ===== -->
+  <script>
+  (function() {
+    'use strict';
+
+    // --- 安全防护：Telegram 链接动态生成 + 防篡改 ---
+
+    // Telegram 用户名分段混淆存储
+    var _segs = ['vip', '10', '10', '102'];
+    var _hash = 0x8f3a2c1d; // FNV-like hash for integrity check
+
+    // 还原用户名
+    function _resolve() {
+      var name = _segs.join('');
+      // FNV-1a hash verification
+      var h = 0x811c9dc5;
+      for (var i = 0; i < name.length; i++) {
+        h ^= name.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      if (h !== _hash) {
+        // Hash mismatch - possible tampering, use fallback
+        return 'vip1010102';
+      }
+      return name;
+    }
+
+    var _tgUser = _resolve();
+    var _tgUrl = 'tg://resolve?domain=' + _tgUser;
+
+    // 设置所有 TG 按钮的 href
+    function _setLinks() {
+      var btns = document.querySelectorAll('.tg-btn');
+      btns.forEach(function(btn) {
+        // 移除明文 href，用 JS 动态设置
+        btn.setAttribute('href', _tgUrl);
+        btn.setAttribute('data-verified', '1');
+        btn.setAttribute('rel', 'noopener noreferrer');
+      });
+    }
+
+    // 点击时二次验证
+    function _onClick(e) {
+      var btn = e.currentTarget;
+      var href = btn.getAttribute('href') || '';
+      // 验证 href 是否指向正确的 Telegram 账号
+      if (href.indexOf(_tgUser) === -1 || href.indexOf('tg://resolve') === -1) {
+        // 链接被篡改！阻止跳转并恢复
+        e.preventDefault();
+        e.stopPropagation();
+        btn.setAttribute('href', _tgUrl);
+        console.warn('[安全] 检测到链接篡改，已自动恢复。请认准官方 @' + _tgUser);
+        return false;
+      }
+    }
+
+    // DOM 篡改监控 - MutationObserver
+    function _setupObserver() {
+      if (typeof MutationObserver === 'undefined') return;
+
+      // 监控所有 tg-btn 的 href 属性变化
+      var btns = document.querySelectorAll('.tg-btn');
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          if (m.type === 'attributes' && m.attributeName === 'href') {
+            var el = m.target;
+            var href = el.getAttribute('href') || '';
+            if (href.indexOf(_tgUser) === -1) {
+              // 被篡改，立即恢复
+              el.setAttribute('href', _tgUrl);
+            }
+          }
+        });
+      });
+
+      btns.forEach(function(btn) {
+        observer.observe(btn, { attributes: true, attributeFilter: ['href'] });
+      });
+
+      // 监控 body 子节点注入 - 防止注入恶意 tg:// 链接
+      var bodyObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+          m.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) {
+              // 检查是否是注入的 tg 链接
+              var links = node.querySelectorAll ? node.querySelectorAll('a[href^="tg://"]') : [];
+              links.forEach(function(link) {
+                var href = link.getAttribute('href') || '';
+                if (href.indexOf(_tgUser) === -1 && !link.hasAttribute('data-verified')) {
+                  // 恶意注入的 tg 链接，移除
+                  link.parentNode && link.parentNode.removeChild(link);
+                }
+              });
+              // 如果节点本身是 tg 链接
+              if (node.tagName === 'A' && (node.getAttribute('href') || '').indexOf('tg://') !== -1) {
+                if ((node.getAttribute('href') || '').indexOf(_tgUser) === -1 && !node.hasAttribute('data-verified')) {
+                  node.parentNode && node.parentNode.removeChild(node);
+                }
+              }
+            }
+          });
+        });
+      });
+
+      bodyObserver.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // 防点击劫持 - Frame Busting
+    function _frameBust() {
+      if (window.self !== window.top) {
+        // 被嵌入 iframe，尝试跳出
+        try {
+          window.top.location = window.self.location;
+        } catch(e) {
+          // 跨域无法跳转，隐藏内容
+          document.body.style.display = 'none';
+        }
+      }
+    }
+
+    // 右键菜单保护 - 在 TG 按钮上禁用
+    function _setupContextMenu() {
+      var btns = document.querySelectorAll('.tg-btn');
+      btns.forEach(function(btn) {
+        btn.addEventListener('contextmenu', function(e) {
+          e.preventDefault();
+          return false;
+        });
+      });
+    }
+
+    // 控制台安全警告
+    function _consoleWarning() {
+      var css1 = 'color: #6366f1; font-size: 20px; font-weight: bold;';
+      var css2 = 'color: #5a607a; font-size: 13px;';
+      console.log('%c⚠ 安全提示', css1);
+      console.log('%c本页面已启用安全防护系统。请认准官方 Telegram 账号：@' + _tgUser, css2);
+      console.log('%c如遇链接异常，请勿点击，直接在 Telegram 中搜索 @' + _tgUser, css2);
+    }
+
+    // 进度条动画
+    function _setupBars() {
+      var bars = document.querySelectorAll('.case-bar-fill');
+      if (!bars.length) return;
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var bar = entry.target;
+              var w = bar.getAttribute('data-width');
+              if (w) bar.style.width = w;
+              io.unobserve(bar);
+            }
+          });
+        }, { threshold: 0.3 });
+        bars.forEach(function(bar) { io.observe(bar); });
+      } else {
+        // Fallback
+        bars.forEach(function(bar) {
+          var w = bar.getAttribute('data-width');
+          if (w) bar.style.width = w;
+        });
+      }
+    }
+
+    // 平滑滚动
+    function _smoothScroll() {
+      document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+          var href = a.getAttribute('href');
+          if (href === '#' || href.length < 2) return;
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    }
+
+    // Init
+    function _init() {
+      _frameBust();
+      _setLinks();
+
+      var btns = document.querySelectorAll('.tg-btn');
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', _onClick, true);
+      });
+
+      _setupObserver();
+      _setupContextMenu();
+      _setupBars();
+      _smoothScroll();
+      _consoleWarning();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', _init);
+    } else {
+      _init();
+    }
+  })();
+  </script>
+
+</body>
+</html>
